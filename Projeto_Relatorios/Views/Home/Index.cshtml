@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Relatorios";
+
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<string>
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h1 class="h3 mb-0">Relatórios</h1>
+            <a href="/Upload" class="btn btn-light text-primary fw-semibold">
+                + Adicionar Arquivo
+            </a>
+        </div>
+        <div class="card-body">
+            <h2 class="h5 text-secondary mb-4">Arquivos na Pasta</h2>
+            <table class="table table-striped table-bordered table-hover align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Nome do Arquivo</th>
+                        <th class="text-nowrap" style="width: 1%;">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var arquivo in Model)
+                    {
+                        <tr>
+                            <td>@arquivo</td>
+                            <td class="d-flex gap-2">
+                                <a asp-controller="Download" asp-action="Download" asp-route-nomeArquivo="@arquivo" class="btn btn-sm btn-outline-primary">
+                                    Baixar
+                                </a>
+
+                                <form asp-controller="Delete" asp-action="Deleta" asp-route-nomeArquivo="@arquivo" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja excluir este arquivo?');">
+                                        Excluir
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

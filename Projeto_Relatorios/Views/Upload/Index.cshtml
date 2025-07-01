@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Upload de Arquivo";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2 class="h5 mb-0">Upload de Arquivo</h2>
+        </div>
+        <div class="card-body">
+
+            @if (TempData["Mensagem"] != null)
+            {
+                <div class="alert alert-info">@TempData["Mensagem"]</div>
+            }
+
+            <form asp-action="Enviar" asp-controller="Upload" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="arquivo" class="form-label">Escolha um arquivo:</label>
+                    <input type="file" class="form-control" id="arquivo" name="arquivo" required />
+                </div>
+                <button type="submit" class="btn btn-success">Enviar</button>
+                <a href="/" class="btn btn-secondary ms-2">Cancelar</a>
+            </form>
+
+        </div>
+    </div>
+</div>
